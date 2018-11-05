@@ -146,11 +146,12 @@ def get_basic_stats(np_data_a):
     max_a = list()
     row_col = np_data_a.shape
     rows = row_col[0]
-    for i in range(rows):
-        mu_a.append(numpy.mean(np_data_a[i]))
-        std_a.append(numpy.std(np_data_a[i]))
-        min_a.append(numpy.min(np_data_a[i]))
-        max_a.append(numpy.max(np_data_a[i]))
+    cols = row_col[1]
+    for i in range(cols):
+        mu_a.append(numpy.mean(np_data_a[:,i]))
+        std_a.append(numpy.std(np_data_a[:,i]))
+        min_a.append(numpy.min(np_data_a[:,i]))
+        max_a.append(numpy.max(np_data_a[:,i]))
 
     ret_list = [mu_a, std_a, min_a, max_a]
 

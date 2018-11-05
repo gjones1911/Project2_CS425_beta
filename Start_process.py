@@ -2,6 +2,12 @@ import numpy
 import matplotlib
 import matplotlib.pyplot as plt
 import ML_Visualizations
+from ML_Visualizations import make_prop_o_var_plot
+from ML_Visualizations import make_scree_graph_data
+from ML_Visualizations import make_scree_plot_usv
+from ML_Visualizations import dual_scree_prop_var
+from ML_Visualizations import basic_scatter_plot
+
 import csv
 import json
 from Process_CSV_to_Json import load_numpy_da_file
@@ -28,9 +34,77 @@ num_vars = len(utk_avg_data[0])
 attrib_array = get_attrib_array(np_utk_avg)
 utk_data_stats = get_basic_stats(np_utk_avg)
 
+mu_a = utk_data_stats[0]
+std_a = utk_data_stats[1]
+min_a = utk_data_stats[2]
+max_a = utk_data_stats[3]
+
+u, s, vh = numpy.linalg.svd(np_utk_avg, full_matrices=True, compute_uv=True)
+
+
+v = numpy.transpose(vh)
+
+vx = v[:, 0]
+print('v')
+print(v)
+print(len(v))
+print(len(v[0]))
+print('col 0:')
+print(vx.tolist())
+print(len(vx.tolist()))
+
+vy = v[:, 1]
+print('col 1:')
+print(vy.tolist())
+print(len(vy.tolist()))
+
+W = v[:, 0:2]
+print('W')
+print(W)
+print(len(W))
+print(len(W[0]))
+
+WT = numpy.transpose(W)
+print('W transpose')
+print(WT.tolist())
+print(len(WT))
+print(len(WT[0]))
+
+print('Mu')
+print(mu_a)
+print(len(mu_a))
+'''
+print('std')
+print(std_a)
+print(len(std_a))
+
+print('Min')
+print(min_a)
+print(len(min_a))
+
+print('Max')
+print(max_a)
+print(len(max_a))
+'''
+
+#make_scree_graph_data(np_utk_avg)
+
+#make_scree_plot_usv(s, num_obs)
+
+#make_prop_o_var_plot(s, num_obs)
+
+#basic_scatter_plot(vx, vy, 'w1_1', 'w2_2', 'w1 vs. w2', 'w1 vs. w2')
+
+
+#dual_scree_prop_var(s, num_obs)
+
 #for row in utk_avg_data:
 #    print(row)
 
+
+
+
+'''
 u, s, vh = numpy.linalg.svd(np_utk_avg, full_matrices=True, compute_uv=True)
 
 sum_s = sum(s.tolist())
@@ -59,8 +133,10 @@ print('singular values:')
 print(s.tolist())
 print('')
 print('vh transpose')
+'''
 
 
+'''
 fig = plt.figure(figsize=(8,5))
 plt.plot(single_vals, eigen_vals, 'ro-', linewidth=2)
 plt.title('Scree Plot')
@@ -72,3 +148,4 @@ leg = plt.legend(['Eigenvalues from SVD'], loc='best', borderpad=0.3,
 leg.get_frame().set_alpha(0.4)
 leg.draggable(state=True)
 plt.show()
+'''
